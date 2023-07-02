@@ -10,6 +10,8 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+#define _CRT_SECURE_NO_WARNINGS
+
 #include "ft_bmp.h"
 
 #include <stdio.h>
@@ -18,9 +20,9 @@
 static void	fill(void *context, size_t x, size_t y, t_ft_bmp_pixel *out)
 {
 	(void)context;
-	out->r = (uint8_t)(256 - x);
-	out->g = (uint8_t)(256 - y);
-	out->b = (uint8_t)1;
+	out->r = (uint8_t)x;
+	out->g = (uint8_t)y;
+	out->b = 255;
 }
 
 int	main(int argc, char **argv)
