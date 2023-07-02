@@ -4,7 +4,7 @@ all: $(EXAMPLES)
 .PHONY: all
 
 %.bmp: tmp/%.exe
-	./$< > $@.tmp
+	./$< $@.tmp
 	mv $@.tmp $@
 
 tmp/%.exe: src/%.c tmp/libft_bmp.a
