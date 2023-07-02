@@ -6,11 +6,11 @@
 /*   By: Juyeong Maing <jmaing@student.42seoul.kr>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/02 15:46:56 by Juyeong Maing     #+#    #+#             */
-/*   Updated: 2023/07/02 17:40:30 by Juyeong Maing    ###   ########.fr       */
+/*   Updated: 2023/07/02 17:46:57 by Juyeong Maing    ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#define _CRT_SECURE_NO_WARNINGS
+#include "ft_suppress_msvc_warnings.h"
 
 #include "ft_bmp.h"
 
@@ -43,25 +43,10 @@ int	main(int argc, char **argv)
 		return (EXIT_FAILURE);
 	bmp = ft_bmp_new(256, 256, fill, NULL);
 	if (!bmp)
-	{
-		fclose(fp);
 		return (EXIT_FAILURE);
-	}
 	if (ft_bmp_serialize(bmp, &result, &length))
-	{
-		fclose(fp);
-		free(bmp);
 		return (EXIT_FAILURE);
-	}
 	if (fwrite(result, 1, length, fp) != length)
-	{
-		fclose(fp);
-		free(result);
-		free(bmp);
 		return (EXIT_FAILURE);
-	}
-	fclose(fp);
-	free(result);
-	free(bmp);
 	return (EXIT_SUCCESS);
 }
