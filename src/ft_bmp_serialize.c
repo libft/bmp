@@ -6,7 +6,7 @@
 /*   By: Juyeong Maing <jmaing@student.42seoul.kr>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/02 15:22:35 by Juyeong Maing     #+#    #+#             */
-/*   Updated: 2023/07/02 16:12:31 by Juyeong Maing    ###   ########.fr       */
+/*   Updated: 2023/07/02 18:07:45 by Juyeong Maing    ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,9 +84,12 @@ static void	fill_body(t_ft_bmp *self, char *result)
 		x = (size_t)(-1);
 		while (++x < self->width)
 		{
-			result[offset++] = self->extra[self->width * y + x].b;
-			result[offset++] = self->extra[self->width * y + x].g;
-			result[offset++] = self->extra[self->width * y + x].r;
+			*((uint8_t *)&result[offset++])
+				= self->extra[self->width * y + x].b;
+			*((uint8_t *)&result[offset++])
+				= self->extra[self->width * y + x].g;
+			*((uint8_t *)&result[offset++])
+				= self->extra[self->width * y + x].r;
 		}
 		i = (size_t)(-1);
 		while (++i < row_padding)
