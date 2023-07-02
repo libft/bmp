@@ -18,18 +18,39 @@
 
 # include <io.h>
 
+# include <limits.h>
+# include <stdint.h>
+
+# if SIZE_MAX == UINT16_MAX
+
+typedef int16_t	t_ssize_t;
+
+# elif SIZE_MAX == UINT32_MAX
+
+typedef int32_t	t_ssize_t;
+
+# elif defined(UINT64_MAX) && SIZE_MAX == UINT64_MAX
+
+typedef int64_t	t_ssize_t;
+
+# else
+#  error "Failed to define ssize_t"
+# endif
+
 #else
 
 # include <unistd.h>
+
+typedef ssize_t	t_ssize_t;
 
 #endif
 
 static void	fill(void *context, size_t x, size_t y, t_ft_bmp_pixel *out)
 {
 	(void)context;
-	out->r = 256 - x;
-	out->g = 256 - y;
-	out->b = 1;
+	out->r = (uint8_t)(256 - x);
+	out->g = (uint8_t)(256 - y);
+	out->b = (uint8_t)1;
 }
 
 #if defined(WIN32) || defined(_WIN32) || defined(__WIN32__) || defined(__NT__)
@@ -47,7 +68,7 @@ int	main(void)
 		free(bmp);
 		return (EXIT_FAILURE);
 	}
-	if ((size_t)_write(1, result, length) != length)
+	if (_write(1, result, (unsigned int)length) != (t_ssize_t)length)
 	{
 		free(result);
 		free(bmp);
@@ -70,7 +91,7 @@ int	main(void)
 		free(bmp);
 		return (EXIT_FAILURE);
 	}
-	if ((size_t)write(1, result, length) != length)
+	if (write(1, result, length) != (ssize_t)length)
 	{
 		free(result);
 		free(bmp);
