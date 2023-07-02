@@ -1,0 +1,10 @@
+-Wall
+-Wextra
+-Werror
+-std=c99
+-pedantic
+-Iinclude
+-Isrc/include
+-DMINIRT_PRECISION=1
+-Itest/branch/include
+-Itest/mocks/branch/include
