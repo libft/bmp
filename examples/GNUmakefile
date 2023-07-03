@@ -1,4 +1,4 @@
-EXAMPLES := 1.bmp
+EXAMPLES := 1.bmp 2.bmp
 
 all: $(EXAMPLES)
 .PHONY: all
